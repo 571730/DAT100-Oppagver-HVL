@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
-/**
- * Created by Mikkel on 10.09.2017.
- */
+
 public class Oppgave3 {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
@@ -16,12 +14,15 @@ public class Oppgave3 {
             System.out.println("Skriv et ord og trykk enter");
             ordListe[i] = sc.nextLine();
         }
+        System.out.println("Din liste: ");
         for (String s: ordListe)
         {
-            System.out.println(s);
+            System.out.print(s + " ");
         }
 
-        System.out.println("\nHvilken sekvens vil du telle?");
+        // Oppagve B
+
+        System.out.println("\n\nHvilken sekvens vil du telle?");
         String sekvens = sc.nextLine();
 
         for (String s: ordListe) {
@@ -30,6 +31,8 @@ public class Oppgave3 {
             }
         }
         System.out.println("\nSekvensen " + sekvens + " forekommer " + tallSekvens + " ganger i ordlisten.\n");
+
+        // Oppgave C
 
         for (String ord: ordListe){
             if (ord.length() == 1){
