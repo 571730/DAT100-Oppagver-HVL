@@ -59,30 +59,6 @@ public class Varer {
 
 class Klient {
     public static void main(String[] args) {
-        /*
-        Varer banan = new Varer(10, "Banan", 4);
-        Varer eple = new Varer(12, "Eple", 5);
-        Varer cola = new Varer(2, "Coca Cola", 23);
-        Varer fanta = new Varer(3, "Fanta", 22);
-        Varer sjokolade = new Varer(1, "Sjokolade", 30);
-        Varelager lager = new Varelager(10);
-        lager.leggTil(banan);
-        lager.leggTil(cola);
-        lager.leggTil(eple);
-        lager.leggTil(sjokolade);
-        lager.leggTil(fanta);
-        System.out.println("Total pris på alt som er på lager er " + lager.totalPris() + "kr");
-        System.out.println(lager.toString());
-        lager.slett(10);
-        System.out.println(lager.toString());
-        lager.leggTil(banan);
-        System.out.println(lager.toString());
-        Grensesnitt gui = new Grensesnitt();
-        gui.leggTilVare(lager);
-        System.out.println(lager.toString());
-        gui.slettVare(lager);
-        System.out.println(lager.toString());
-        */
         Meny meny = new Meny();
         meny.menyen();
 
@@ -106,17 +82,25 @@ class Varelager {
         this(STDK);
     }
 
+    public int getAntall() {
+        return antall;
+    }
+
+    public Varer[] getLager() {
+        return lager;
+    }
+
     public Varelager(int startkapasitet) {
         lager = new Varer[startkapasitet];
         antall = 0;
     }
 
     public void leggTil(Varer v) {
-        if (antall<lager.length){
+        if (antall < lager.length) {
             lager[antall] = v;
             System.out.println("La til varen " + v.getNavn() + " i lageret.");
             antall++;
-        }else {
+        } else {
             utvid();
             lager[antall] = v;
             System.out.println("La til varen " + v.getNavn() + " i lageret.");
@@ -124,17 +108,19 @@ class Varelager {
         }
 
     }
-    void utvid(){
+
+    void utvid() {
         System.out.println("Utvider lageret med 5 plasser");
-        Varer[] lagerKopi = new Varer[lager.length+5];
-        for (int i =0; i<lager.length; i++){
+        Varer[] lagerKopi = new Varer[lager.length + 5];
+        for (int i = 0; i < lager.length; i++) {
             lagerKopi[i] = lager[i];
         }
         lager = lagerKopi;
     }
-    void skrivUtPent(){
+
+    void skrivUtPent() {
         System.out.println("Antall varer på lager: " + antall);
-        for (int i=0; i<antall; i++){
+        for (int i = 0; i < antall; i++) {
             System.out.println("\nVarenummer: " + lager[i].getVarenummer());
             System.out.println("Navn: " + lager[i].getNavn());
             System.out.println("Pris: " + lager[i].getPris() + " kr");
@@ -239,6 +225,24 @@ class Grensesnitt {
         } while (!acceptInput);
     }
 
+    public void printSortert(Varelager varelager) {
+        System.out.println("Skriver ut varelager sortert etter varenummer");
+        int[] nrListe = new int[varelager.getAntall()];
+        Varer[] lager = varelager.getLager();
+
+        for (int i = 0; i < varelager.getAntall(); i++) {
+            nrListe[i] = lager[i].getVarenummer();
+        }
+        Arrays.sort(nrListe);
+        for (int tall : nrListe) {
+            for (int i = 0; i<nrListe.length; i++) {
+                if (tall == lager[i].getVarenummer()){
+                    System.out.println(lager[i]);
+                }
+            }
+        }
+    }
+
 }
 
 class Meny {
@@ -253,7 +257,8 @@ class Meny {
         do {
             System.out.println("\n1) Se på lageret\n2) Legg til vare i lageret\n" +
                     "3) Slett vare fra lageret\n" +
-                    "4) Se totalpris av alle varer på lageret\n9) Avslutt programmet");
+                    "4) Se totalpris av alle varer på lageret\n" +
+                    "5) Se lager sortert etter varenummer\n9) Avslutt programmet");
             try {
                 dittValg = sc.nextInt();
                 sc.nextLine();
@@ -270,6 +275,9 @@ class Meny {
                         break;
                     case 4:
                         System.out.format("Total pris på varer i lageret: %.2f kr%n", lager.totalPris());
+                        break;
+                    case 5:
+                        gui.printSortert(lager);
                         break;
                     case 9:
                         run = false;
