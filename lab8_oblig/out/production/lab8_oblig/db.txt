@@ -1,0 +1,10 @@
+9
+L Ola Nordmann 1964 m 20000 4736256
+L Mohammed Ali 1956 m 25000 4736827
+S Birkeland Mikkel 1993 m 435423 IT-A
+L Woods Tiger 1975 m 40000 9386256
+S Lee Harry 1995 m 937382 IT-B
+S Alba Jessica 1981 f 847382 IT-B
+S Jensen Kari 1996 f 938392 IT-A
+S Clinton Hillary 1991 f 048392 IT-B
+S Indrebø Jørn 1988 m 038927 IT-A
